@@ -5,7 +5,7 @@ function buildPrefix(currentFilename, separator, config) {
     const { levelsToPreserve } = config;
 
     const fileNameParts = currentFilename.split(separator);
-    return fileNameParts.slice(fileNameParts.length - 1 - levelsToPreserve).join(separator);
+    return fileNameParts.slice(Math.max(fileNameParts.length - 1 - levelsToPreserve, 1)).join(separator);
 }
 
 function showRelatedFiles() {

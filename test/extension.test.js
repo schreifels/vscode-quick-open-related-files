@@ -1,24 +1,20 @@
 /* global suite, test */
 
-//
-// Note: This example test is leveraging the Mocha test framework.
-// Please refer to their documentation on https://mochajs.org/ for help.
-//
+const assert = require('assert');
+const extension = require('../extension');
 
-// The module 'assert' provides assertion methods from node
-var assert = require('assert');
+suite('extension tests', function() {
+    function buildPrefix(levelsToPreserve) {
+        return extension.buildPrefix('/Users/mike/projects/example-project/app/models/person.rb', '/', {
+            levelsToPreserve
+        });
+    }
 
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
-var vscode = require('vscode');
-var myExtension = require('../extension');
-
-// Defines a Mocha test suite to group tests of similar kind together
-suite("Extension Tests", function() {
-
-    // Defines a Mocha unit test
-    test("Something 1", function() {
-        assert.equal(-1, [1, 2, 3].indexOf(5));
-        assert.equal(-1, [1, 2, 3].indexOf(0));
+    test('preserves the correct number of levels', function() {
+        assert.strictEqual(buildPrefix(0), 'person.rb');
+        assert.strictEqual(buildPrefix(1), 'models/person.rb');
+        assert.strictEqual(buildPrefix(2), 'app/models/person.rb');
+        assert.strictEqual(buildPrefix(6), 'Users/mike/projects/example-project/app/models/person.rb');
+        assert.strictEqual(buildPrefix(10), 'Users/mike/projects/example-project/app/models/person.rb');
     });
 });
