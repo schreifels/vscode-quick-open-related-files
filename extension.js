@@ -1,8 +1,13 @@
 const path = require('path');
 const vscode = require('vscode');
 
-function buildPrefix(currentFilename, separator, config) {
+function buildPrefix(currentFilename, projectPath, separator, config) {
     const { levelsToPreserve } = config;
+
+    if (currentFilename.indexOf(projectPath) === 0) {
+        currentFilename = currentFilename.slice(projectPath.length);
+    }
+
     const filenameParts = currentFilename.split(separator);
 
     const index = filenameParts.length - 1 - levelsToPreserve;
