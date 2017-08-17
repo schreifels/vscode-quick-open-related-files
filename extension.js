@@ -8,7 +8,7 @@ function quickOpen() {
 }
 
 function activate(context) {
-  context.subscriptions.push(vscode.commands.registerCommand('extension.sayHello', quickOpen));
+  context.subscriptions.push(vscode.commands.registerCommand('quick-pick-related-files.show', quickOpen));
 }
 
 module.exports.activate = activate;
