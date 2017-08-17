@@ -1,6 +1,6 @@
 const vscode = require('vscode');
 
-function quickOpen() {
+function showRelatedFiles() {
   const { fileName } = vscode.window.activeTextEditor.document;
   const fileNameParts = fileName.split('/');
   const prefilledText = fileNameParts[fileNameParts.length - 1];
@@ -8,7 +8,7 @@ function quickOpen() {
 }
 
 function activate(context) {
-  context.subscriptions.push(vscode.commands.registerCommand('quick-pick-related-files.show', quickOpen));
+  context.subscriptions.push(vscode.commands.registerCommand('quickPickRelatedFiles.show', showRelatedFiles));
 }
 
 module.exports.activate = activate;

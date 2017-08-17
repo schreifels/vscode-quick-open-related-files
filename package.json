@@ -11,13 +11,13 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:quick-pick-related-files.show"
+        "onCommand:quickPickRelatedFiles.show"
     ],
     "main": "./extension",
     "contributes": {
         "commands": [
             {
-                "command": "quick-pick-related-files.show",
+                "command": "quickPickRelatedFiles.show",
                 "title": "Quick Pick Related Files"
             }
         ]
