@@ -15,6 +15,17 @@
     ],
     "main": "./extension",
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "quick-pick-related-files configuration",
+            "properties": {
+                "quickPickRelatedFiles.levelsToPreserve": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Number of levels in the path to preserve"
+                }
+            }
+        },
         "commands": [
             {
                 "command": "quickPickRelatedFiles.show",
