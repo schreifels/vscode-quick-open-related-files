@@ -4,8 +4,8 @@ const assert = require('assert');
 const extension = require('../extension');
 
 suite('extension tests', function() {
-    function buildPrefix(levelsToPreserve, projectPath = '') {
-        return extension.buildPrefix('/Users/mike/projects/example-project/app/models/person.rb', projectPath, '/', {
+    function buildPrefix(levelsToPreserve, workspaceFolder = undefined) {
+        return extension.buildPrefix('/Users/mike/projects/example-project/app/models/person.rb', workspaceFolder, '/', {
             levelsToPreserve
         });
     }
@@ -19,7 +19,7 @@ suite('extension tests', function() {
         assert.strictEqual(buildPrefix(10), 'Users/mike/projects/example-project/app/models/person.rb');
     });
 
-    test('respects projectPath', function() {
+    test('respects workspaceFolder', function() {
         assert.strictEqual(buildPrefix(0, '/Users/mike/projects/example-project'), 'person.rb');
         assert.strictEqual(buildPrefix(10, '/Users/mike/projects/example-project'), 'app/models/person.rb');
         assert.strictEqual(buildPrefix(6, '/some/unrelated/path'), 'Users/mike/projects/example-project/app/models/person.rb');

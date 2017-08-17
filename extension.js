@@ -1,11 +1,11 @@
 const path = require('path');
 const vscode = require('vscode');
 
-function buildPrefix(currentFilename, projectPath, separator, config) {
+function buildPrefix(currentFilename, workspaceFolder, separator, config) {
     const { levelsToPreserve } = config;
 
-    if (currentFilename.indexOf(projectPath) === 0) {
-        currentFilename = currentFilename.slice(projectPath.length);
+    if (workspaceFolder && currentFilename.indexOf(workspaceFolder) === 0) {
+        currentFilename = currentFilename.slice(workspaceFolder.length);
     }
 
     const filenameParts = currentFilename.split(separator);
@@ -16,11 +16,14 @@ function buildPrefix(currentFilename, projectPath, separator, config) {
 }
 
 function showRelatedFiles() {
-    const currentFilename = vscode.window.activeTextEditor.document.fileName;
+    const { document } = vscode.window.activeTextEditor;
+
+    const currentFilename = document.fileName;
+    const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri).uri.path;
     const separator = path.sep;
     const config = vscode.workspace.getConfiguration('quickPickRelatedFiles');
 
-    const prefix = buildPrefix(currentFilename, separator, config);
+    const prefix = buildPrefix(currentFilename, workspaceFolder, separator, config);
     vscode.commands.executeCommand('workbench.action.quickOpen', prefix);
 }
 
