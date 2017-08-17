@@ -3,9 +3,11 @@ const vscode = require('vscode');
 
 function buildPrefix(currentFilename, separator, config) {
     const { levelsToPreserve } = config;
+    const filenameParts = currentFilename.split(separator);
 
-    const fileNameParts = currentFilename.split(separator);
-    return fileNameParts.slice(Math.max(fileNameParts.length - 1 - levelsToPreserve, 1)).join(separator);
+    const index = filenameParts.length - 1 - levelsToPreserve;
+    const boundedIndex = Math.min(Math.max(index, 1), filenameParts.length - 1);
+    return filenameParts.slice(boundedIndex).join(separator);
 }
 
 function showRelatedFiles() {

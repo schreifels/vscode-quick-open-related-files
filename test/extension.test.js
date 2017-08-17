@@ -11,6 +11,7 @@ suite('extension tests', function() {
     }
 
     test('preserves the correct number of levels', function() {
+        assert.strictEqual(buildPrefix(-10), 'person.rb');
         assert.strictEqual(buildPrefix(0), 'person.rb');
         assert.strictEqual(buildPrefix(1), 'models/person.rb');
         assert.strictEqual(buildPrefix(2), 'app/models/person.rb');
