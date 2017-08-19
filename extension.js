@@ -29,13 +29,17 @@ function stripExtension(currentFilename, separator) {
     return filenameParts.join(separator);
 }
 
+function stripGenericPattern(currentFilename, pattern) {
+    return currentFilename.replace(pattern, '');
+}
+
 function stripPatterns(currentFilename, separator, patterns) {
     if (patterns) {
         patterns.forEach(function(pattern) {
             if (pattern === '{EXTENSION}') {
                 currentFilename = stripExtension(currentFilename, separator);
             } else {
-                currentFilename = currentFilename.replace(pattern, '');
+                currentFilename = stripGenericPattern(currentFilename, pattern);
             }
         });
     }
