@@ -23,6 +23,13 @@
                     "type": "number",
                     "default": 1,
                     "description": "Number of levels in the path to preserve"
+                },
+                "quickPickRelatedFiles.transformations": {
+                    "type": "array",
+                    "default": [
+                        "{EXTENSION}"
+                    ],
+                    "description": "Regular expressions or string matchers to replace"
                 }
             }
         },

@@ -1,18 +1,35 @@
 const path = require('path');
 const vscode = require('vscode');
 
-function buildPrefix(currentFilename, workspaceFolder, separator, config) {
-    const { levelsToPreserve } = config;
+function stripExtension(basename) {
+    let extension;
 
+    while (extension = path.extname(basename)) {
+        basename = path.basename(basename, extension);
+    }
+
+    return basename;
+}
+
+function buildPrefix(currentFilename, workspaceFolder, separator, config) {
     if (workspaceFolder && currentFilename.indexOf(workspaceFolder) === 0) {
         currentFilename = currentFilename.slice(workspaceFolder.length);
     }
 
-    const filenameParts = currentFilename.split(separator);
-
-    const index = filenameParts.length - 1 - levelsToPreserve;
+    let filenameParts = currentFilename.split(separator);
+    const index = filenameParts.length - 1 - config.levelsToPreserve;
     const boundedIndex = Math.min(Math.max(index, 1), filenameParts.length - 1);
-    return filenameParts.slice(boundedIndex).join(separator);
+    filenameParts = filenameParts.slice(boundedIndex);
+
+    if (config.transformations) {
+        config.transformations.forEach((transformation) => {
+            if (transformation === '{EXTENSION}') {
+                filenameParts[filenameParts.length - 1] = stripExtension(filenameParts[filenameParts.length - 1]);
+            }
+        });
+    }
+
+    return filenameParts.join(separator);
 }
 
 function showRelatedFiles() {
