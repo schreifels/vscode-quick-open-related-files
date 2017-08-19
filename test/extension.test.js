@@ -49,13 +49,29 @@ suite('extension tests', function() {
     });
 
     test('respects patternsToStrip', function() {
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip: [] }), 'dir/person.html.erb');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip: ['{EXTENSION}'] }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.rb', patternsToStrip: ['{EXTENSION}'] }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/.gitignore', patternsToStrip: ['{EXTENSION}'] }), 'dir/.gitignore');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip: [] }),
+            'dir/person.html.erb');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip: ['{EXTENSION}'] }),
+            'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.rb', patternsToStrip: ['{EXTENSION}'] }),
+            'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/.gitignore', patternsToStrip: ['{EXTENSION}'] }),
+            'dir/.gitignore');
 
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.test.rb', patternsToStrip: ['.test'] }), 'dir/person.rb');
-        assert.strictEqual(buildPrefix(10, { currentFilename: '/dir/ignored_dir/person.test.rb', patternsToStrip: ['.test', 'ignored_dir/'] }), 'dir/person.rb');
-        assert.strictEqual(buildPrefix(10, { currentFilename: '/a/b/c/d.html', patternsToStrip: ['b/', 'c/'] }), 'a/d.html');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.test.rb', patternsToStrip: ['.test'] }),
+            'dir/person.rb');
+        assert.strictEqual(buildPrefix(2, { currentFilename: '/dir/ignored_dir/person.test.rb', patternsToStrip: ['.test', 'ignored_dir/'] }),
+            'dir/person.rb');
+        assert.strictEqual(buildPrefix(4, { currentFilename: '/a/b/c/d/e.html', patternsToStrip: ['b/', 'c/d/'] }),
+            'a/e.html');
+
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.rb', patternsToStrip: ['/person'] }),
+            'dir.rb');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.rb', patternsToStrip: ['dir/'] }),
+            'person.rb');
+        assert.strictEqual(buildPrefix(2, { currentFilename: '/app/models/my.rb/person.rb', patternsToStrip: ['/\\.js$/', '/\\.rb$/'] }),
+            'models/my.rb/person');
+        assert.strictEqual(buildPrefix(2, { currentFilename: '/app/models/person.rb', patternsToStrip: ['/\\/m[a-z]+/'] }),
+            'app/person.rb');
     });
 });
