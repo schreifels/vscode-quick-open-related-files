@@ -13,7 +13,7 @@
     "activationEvents": [
         "onCommand:quickPickRelatedFiles.show"
     ],
-    "main": "./extension",
+    "main": "./src/extension",
     "contributes": {
         "configuration": {
             "type": "object",
