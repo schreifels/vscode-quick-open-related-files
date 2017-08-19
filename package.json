@@ -1,5 +1,5 @@
 {
-    "name": "quick-open-related-files",
+    "name": "vscode-quick-open-related-files",
     "displayName": "quick-open-related-files",
     "description": "Instantly jump to related files using the Quick Open menu",
     "version": "0.1.0",
