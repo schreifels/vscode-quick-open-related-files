@@ -68,11 +68,12 @@ function showRelatedFiles() {
     const { document } = vscode.window.activeTextEditor;
 
     const currentFilename = document.fileName;
-    const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri).uri.path;
+    const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+    const maybeWorkspaceFolder = workspaceFolder ? workspaceFolder.uri.path : '';
     const separator = path.sep;
     const config = vscode.workspace.getConfiguration('quickOpenRelatedFiles');
 
-    const prefix = buildPrefix(currentFilename, workspaceFolder, separator, config);
+    const prefix = buildPrefix(currentFilename, maybeWorkspaceFolder, separator, config);
     vscode.commands.executeCommand('workbench.action.quickOpen', prefix);
 }
 
