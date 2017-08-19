@@ -62,6 +62,8 @@ suite('extension tests', function() {
             'dir/person.rb');
         assert.strictEqual(buildPrefix(2, { currentFilename: '/dir/ignored_dir/person.test.rb', patternsToStrip: ['.test', 'ignored_dir/'] }),
             'dir/person.rb');
+        assert.strictEqual(buildPrefix(3, { currentFilename: '/dir/target/intermediate/target.rb', patternsToStrip: ['target'] }),
+            'dir//intermediate/.rb');
         assert.strictEqual(buildPrefix(4, { currentFilename: '/a/b/c/d/e.html', patternsToStrip: ['b/', 'c/d/'] }),
             'a/e.html');
 
@@ -69,6 +71,8 @@ suite('extension tests', function() {
             'dir.rb');
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.rb', patternsToStrip: ['dir/'] }),
             'person.rb');
+        assert.strictEqual(buildPrefix(3, { currentFilename: '/animals/octopus/orca/index.html', patternsToStrip: ['/\/o[a-z]+/'] }),
+            'animals/index.html');
         assert.strictEqual(buildPrefix(2, { currentFilename: '/app/models/my.rb/person.rb', patternsToStrip: ['/\\.js$/', '/\\.rb$/'] }),
             'models/my.rb/person');
         assert.strictEqual(buildPrefix(2, { currentFilename: '/app/models/person.rb', patternsToStrip: ['/\\/m[a-z]+/'] }),

@@ -31,10 +31,15 @@ function stripExtension(currentFilename, separator) {
 
 function stripGenericPattern(currentFilename, pattern) {
     if (pattern.startsWith('/') && pattern.endsWith('/')) {
-        pattern = new RegExp(pattern.slice(1, pattern.length - 1));
+        pattern = new RegExp(pattern.slice(1, pattern.length - 1), 'g');
+        currentFilename = currentFilename.replace(pattern, '');
+    } else {
+        while (currentFilename.includes(pattern)) {
+            currentFilename = currentFilename.replace(pattern, '');
+        }
     }
 
-    return currentFilename.replace(pattern, '');
+    return currentFilename;
 }
 
 function stripPatterns(currentFilename, separator, patterns) {
