@@ -24,12 +24,12 @@
                     "default": 1,
                     "description": "Number of directory levels in the path to preserve"
                 },
-                "quickPickRelatedFiles.transformations": {
+                "quickPickRelatedFiles.patternsToStrip": {
                     "type": "array",
                     "default": [
                         "{EXTENSION}"
                     ],
-                    "description": "Regular expressions or string matchers to replace"
+                    "description": "Regular expressions or strings to remove from the path"
                 }
             }
         },

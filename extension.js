@@ -21,9 +21,9 @@ function buildPrefix(currentFilename, workspaceFolder, separator, config) {
     const boundedIndex = Math.min(Math.max(index, 1), filenameParts.length - 1);
     filenameParts = filenameParts.slice(boundedIndex);
 
-    if (config.transformations) {
-        config.transformations.forEach((transformation) => {
-            if (transformation === '{EXTENSION}') {
+    if (config.patternsToStrip) {
+        config.patternsToStrip.forEach((pattern) => {
+            if (pattern === '{EXTENSION}') {
                 filenameParts[filenameParts.length - 1] = stripExtension(filenameParts[filenameParts.length - 1]);
             }
         });

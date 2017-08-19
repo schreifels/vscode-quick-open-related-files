@@ -10,7 +10,7 @@ suite('extension tests', function() {
         {
             currentFilename = '/Users/mike/projects/example-project/app/models/person_spec.rb',
             workspaceFolder = undefined,
-            transformations = undefined
+            patternsToStrip = undefined
         } = {}
     ) {
         return extension.buildPrefix(
@@ -19,7 +19,7 @@ suite('extension tests', function() {
             '/',
             {
                 directoryLevelsToPreserve,
-                transformations
+                patternsToStrip
             }
         );
     }
@@ -44,9 +44,9 @@ suite('extension tests', function() {
             'Users/mike/projects/example-project/app/models/person_spec.rb');
     });
 
-    test('respects transformations', function() {
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', transformations: [] }), 'dir/person.html.erb');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', transformations: ['{EXTENSION}'] }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/.gitignore', transformations: ['{EXTENSION}'] }), 'dir/.gitignore');
+    test('respects patternsToStrip', function() {
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip: [] }), 'dir/person.html.erb');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip: ['{EXTENSION}'] }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/.gitignore', patternsToStrip: ['{EXTENSION}'] }), 'dir/.gitignore');
     });
 });
