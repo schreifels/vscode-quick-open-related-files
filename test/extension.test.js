@@ -1,7 +1,7 @@
 /* global suite, test */
 
 const assert = require('assert');
-const extension = require('../extension');
+const extension = require('../src/extension');
 const packageJson = require('../package.json');
 
 suite('extension tests', function() {
@@ -80,7 +80,7 @@ suite('extension tests', function() {
     });
 
     test('default patternsToStrip', function() {
-        const patternsToStrip = packageJson.contributes.configuration.properties['quickPickRelatedFiles.patternsToStrip'].default;
+        const patternsToStrip = packageJson.contributes.configuration.properties['quickOpenRelatedFiles.patternsToStrip'].default;
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/.gitignore', patternsToStrip }), 'dir/.gitignore');
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_spec.js', patternsToStrip }), 'dir/person');
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_test.js', patternsToStrip }), 'dir/person');

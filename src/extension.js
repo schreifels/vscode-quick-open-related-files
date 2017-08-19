@@ -70,14 +70,14 @@ function showRelatedFiles() {
     const currentFilename = document.fileName;
     const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri).uri.path;
     const separator = path.sep;
-    const config = vscode.workspace.getConfiguration('quickPickRelatedFiles');
+    const config = vscode.workspace.getConfiguration('quickOpenRelatedFiles');
 
     const prefix = buildPrefix(currentFilename, workspaceFolder, separator, config);
     vscode.commands.executeCommand('workbench.action.quickOpen', prefix);
 }
 
 function activate(context) {
-    context.subscriptions.push(vscode.commands.registerCommand('quickPickRelatedFiles.show', showRelatedFiles));
+    context.subscriptions.push(vscode.commands.registerCommand('quickOpenRelatedFiles.show', showRelatedFiles));
 }
 
 module.exports.buildPrefix = buildPrefix;

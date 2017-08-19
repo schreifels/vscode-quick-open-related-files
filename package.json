@@ -1,8 +1,8 @@
 {
-    "name": "quick-pick-related-files",
-    "displayName": "quick-pick-related-files",
-    "description": "Jump to related files using Quick Pick",
-    "version": "0.0.1",
+    "name": "quick-open-related-files",
+    "displayName": "quick-open-related-files",
+    "description": "Instantly jump to related files using the Quick Open menu",
+    "version": "0.1.0",
     "publisher": "schreifels",
     "engines": {
         "vscode": "^1.15.0"
@@ -11,20 +11,20 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:quickPickRelatedFiles.show"
+        "onCommand:quickOpenRelatedFiles.show"
     ],
     "main": "./src/extension",
     "contributes": {
         "configuration": {
             "type": "object",
-            "title": "quick-pick-related-files configuration",
+            "title": "quick-open-related-files configuration",
             "properties": {
-                "quickPickRelatedFiles.directoryLevelsToPreserve": {
+                "quickOpenRelatedFiles.directoryLevelsToPreserve": {
                     "type": "number",
                     "default": 1,
                     "description": "Number of directory levels in the path to preserve"
                 },
-                "quickPickRelatedFiles.patternsToStrip": {
+                "quickOpenRelatedFiles.patternsToStrip": {
                     "type": "array",
                     "default": [
                         "{EXTENSION}",
@@ -39,8 +39,8 @@
         },
         "commands": [
             {
-                "command": "quickPickRelatedFiles.show",
-                "title": "Quick Pick Related Files"
+                "command": "quickOpenRelatedFiles.show",
+                "title": "Quick Open Related Files"
             }
         ]
     },
