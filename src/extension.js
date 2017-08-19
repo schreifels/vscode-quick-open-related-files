@@ -65,15 +65,21 @@ function buildPrefix(currentFilename, workspaceFolder, separator, config) {
 }
 
 function showRelatedFiles() {
-    const { document } = vscode.window.activeTextEditor;
+    const document = vscode.window.activeTextEditor && vscode.window.activeTextEditor.document;
 
-    const currentFilename = document.fileName;
-    const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
-    const maybeWorkspaceFolder = workspaceFolder ? workspaceFolder.uri.path : '';
-    const separator = path.sep;
-    const config = vscode.workspace.getConfiguration('quickOpenRelatedFiles');
+    let prefix;
+    if (document) {
+        const currentFilename = document.fileName;
+        const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+        const maybeWorkspaceFolder = workspaceFolder ? workspaceFolder.uri.path : '';
+        const separator = path.sep;
+        const config = vscode.workspace.getConfiguration('quickOpenRelatedFiles');
 
-    const prefix = buildPrefix(currentFilename, maybeWorkspaceFolder, separator, config);
+        prefix = buildPrefix(currentFilename, maybeWorkspaceFolder, separator, config);
+    } else {
+        prefix = '';
+    }
+
     vscode.commands.executeCommand('workbench.action.quickOpen', prefix);
 }
 
