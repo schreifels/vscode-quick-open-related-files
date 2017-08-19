@@ -1,16 +1,6 @@
 const path = require('path');
 const vscode = require('vscode');
 
-function stripExtension(basename) {
-    let extension;
-
-    while (extension = path.extname(basename)) {
-        basename = path.basename(basename, extension);
-    }
-
-    return basename;
-}
-
 function stripWorkspaceFolder(currentFilename, workspaceFolder) {
     if (workspaceFolder && currentFilename.indexOf(workspaceFolder) === 0) {
         return currentFilename.slice(workspaceFolder.length);
@@ -26,21 +16,36 @@ function stripExcessDirectoryLevels(currentFilename, separator, directoryLevelsT
     return filenameParts.slice(boundedStartingIndex).join(separator);
 }
 
-function buildPrefix(currentFilename, workspaceFolder, separator, config) {
-    currentFilename = stripWorkspaceFolder(currentFilename, workspaceFolder);
-    currentFilename = stripExcessDirectoryLevels(currentFilename, separator, config.directoryLevelsToPreserve);
+function stripExtension(basename) {
+    let extension;
 
-    const filenameParts = currentFilename.split(separator);
+    while (extension = path.extname(basename)) {
+        basename = path.basename(basename, extension);
+    }
 
-    if (config.patternsToStrip) {
-        config.patternsToStrip.forEach((pattern) => {
+    return basename;
+}
+
+function stripPatterns(currentFilename, separator, patterns) {
+    if (patterns) {
+        patterns.forEach((pattern) => {
             if (pattern === '{EXTENSION}') {
+                const filenameParts = currentFilename.split(separator);
                 filenameParts[filenameParts.length - 1] = stripExtension(filenameParts[filenameParts.length - 1]);
+                currentFilename = filenameParts.join(separator);
             }
         });
     }
 
-    return filenameParts.join(separator);
+    return currentFilename;
+}
+
+function buildPrefix(currentFilename, workspaceFolder, separator, config) {
+    currentFilename = stripWorkspaceFolder(currentFilename, workspaceFolder);
+    currentFilename = stripExcessDirectoryLevels(currentFilename, separator, config.directoryLevelsToPreserve);
+    currentFilename = stripPatterns(currentFilename, separator, config.patternsToStrip);
+
+    return currentFilename;
 }
 
 function showRelatedFiles() {
