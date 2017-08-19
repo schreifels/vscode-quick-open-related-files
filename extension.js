@@ -16,23 +16,24 @@ function stripExcessDirectoryLevels(currentFilename, separator, directoryLevelsT
     return filenameParts.slice(boundedStartingIndex).join(separator);
 }
 
-function stripExtension(basename) {
-    let extension;
+function stripExtension(currentFilename, separator) {
+    const filenameParts = currentFilename.split(separator);
 
+    let basename = filenameParts[filenameParts.length - 1];
+    let extension;
     while (extension = path.extname(basename)) {
         basename = path.basename(basename, extension);
     }
 
-    return basename;
+    filenameParts[filenameParts.length - 1] = basename;
+    return filenameParts.join(separator);
 }
 
 function stripPatterns(currentFilename, separator, patterns) {
     if (patterns) {
-        patterns.forEach((pattern) => {
+        patterns.forEach(function(pattern) {
             if (pattern === '{EXTENSION}') {
-                const filenameParts = currentFilename.split(separator);
-                filenameParts[filenameParts.length - 1] = stripExtension(filenameParts[filenameParts.length - 1]);
-                currentFilename = filenameParts.join(separator);
+                currentFilename = stripExtension(currentFilename, separator);
             }
         });
     }
