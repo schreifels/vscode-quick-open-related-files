@@ -6,7 +6,7 @@ const packageJson = require('../package.json');
 
 suite('extension tests', function() {
     function buildPrefix(
-        levelsToPreserve,
+        directoryLevelsToPreserve,
         {
             currentFilename = '/Users/mike/projects/example-project/app/models/person_spec.rb',
             workspaceFolder = undefined,
@@ -18,13 +18,13 @@ suite('extension tests', function() {
             workspaceFolder,
             '/',
             {
-                levelsToPreserve,
+                directoryLevelsToPreserve,
                 transformations
             }
         );
     }
 
-    test('respects levelsToPreserve', function() {
+    test('respects directoryLevelsToPreserve', function() {
         assert.strictEqual(buildPrefix(-10), 'person_spec.rb');
         assert.strictEqual(buildPrefix(0), 'person_spec.rb');
         assert.strictEqual(buildPrefix(1), 'models/person_spec.rb');

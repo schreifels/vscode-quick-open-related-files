@@ -17,7 +17,7 @@ function buildPrefix(currentFilename, workspaceFolder, separator, config) {
     }
 
     let filenameParts = currentFilename.split(separator);
-    const index = filenameParts.length - 1 - config.levelsToPreserve;
+    const index = filenameParts.length - 1 - config.directoryLevelsToPreserve;
     const boundedIndex = Math.min(Math.max(index, 1), filenameParts.length - 1);
     filenameParts = filenameParts.slice(boundedIndex);
 
