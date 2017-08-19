@@ -19,13 +19,18 @@ function stripWorkspaceFolder(currentFilename, workspaceFolder) {
     }
 }
 
+function stripExcessDirectoryLevels(currentFilename, separator, directoryLevelsToPreserve) {
+    const filenameParts = currentFilename.split(separator);
+    const startingIndex = filenameParts.length - 1 - directoryLevelsToPreserve;
+    const boundedStartingIndex = Math.min(Math.max(startingIndex, 1), filenameParts.length - 1);
+    return filenameParts.slice(boundedStartingIndex).join(separator);
+}
+
 function buildPrefix(currentFilename, workspaceFolder, separator, config) {
     currentFilename = stripWorkspaceFolder(currentFilename, workspaceFolder);
+    currentFilename = stripExcessDirectoryLevels(currentFilename, separator, config.directoryLevelsToPreserve);
 
-    let filenameParts = currentFilename.split(separator);
-    const index = filenameParts.length - 1 - config.directoryLevelsToPreserve;
-    const boundedIndex = Math.min(Math.max(index, 1), filenameParts.length - 1);
-    filenameParts = filenameParts.slice(boundedIndex);
+    const filenameParts = currentFilename.split(separator);
 
     if (config.patternsToStrip) {
         config.patternsToStrip.forEach((pattern) => {
