@@ -27,7 +27,11 @@
                 "quickPickRelatedFiles.patternsToStrip": {
                     "type": "array",
                     "default": [
-                        "{EXTENSION}"
+                        "{EXTENSION}",
+                        "/[_\\.]?[sS]pec$/",
+                        "/[_\\.]?[tT]est$/",
+                        "/_?[cC]ontroller$/",
+                        "/_?[hH]elper$/"
                     ],
                     "description": "Regular expressions or strings to remove from the path"
                 }

@@ -74,4 +74,22 @@ suite('extension tests', function() {
         assert.strictEqual(buildPrefix(2, { currentFilename: '/app/models/person.rb', patternsToStrip: ['/\\/m[a-z]+/'] }),
             'app/person.rb');
     });
+
+    test('default patternsToStrip', function() {
+        const patternsToStrip = packageJson.contributes.configuration.properties['quickPickRelatedFiles.patternsToStrip'].default;
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/.gitignore', patternsToStrip }), 'dir/.gitignore');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_spec.js', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_test.js', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/personTest.js', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/personSpec.js', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.test.js', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.spec.js', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_controller.rb', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/personController.js', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_helper.rb', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/personHelper.js', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_controller_spec.rb', patternsToStrip }), 'dir/person');
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/personControllerTest.js', patternsToStrip }), 'dir/person');
+    });
 });
