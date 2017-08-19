@@ -53,5 +53,9 @@ suite('extension tests', function() {
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip: ['{EXTENSION}'] }), 'dir/person');
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.rb', patternsToStrip: ['{EXTENSION}'] }), 'dir/person');
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/.gitignore', patternsToStrip: ['{EXTENSION}'] }), 'dir/.gitignore');
+
+        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.test.rb', patternsToStrip: ['.test'] }), 'dir/person.rb');
+        assert.strictEqual(buildPrefix(10, { currentFilename: '/dir/ignored_dir/person.test.rb', patternsToStrip: ['.test', 'ignored_dir/'] }), 'dir/person.rb');
+        assert.strictEqual(buildPrefix(10, { currentFilename: '/a/b/c/d.html', patternsToStrip: ['b/', 'c/'] }), 'a/d.html');
     });
 });

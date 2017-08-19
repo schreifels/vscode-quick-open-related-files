@@ -34,6 +34,8 @@ function stripPatterns(currentFilename, separator, patterns) {
         patterns.forEach(function(pattern) {
             if (pattern === '{EXTENSION}') {
                 currentFilename = stripExtension(currentFilename, separator);
+            } else {
+                currentFilename = currentFilename.replace(pattern, '');
             }
         });
     }
