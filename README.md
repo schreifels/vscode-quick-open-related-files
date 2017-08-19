@@ -3,7 +3,7 @@
 In a large project, related files often have similar names, but they tend to be
 long and tedious to type when navigating the codebase.
 vscode-quick-open-related-files is a VS Code extension that opens the quick open
-menu with the current filename (after applying an optional set of
+menu with the current filename pre-filled (after applying an optional set of
 transformations, e.g. removing the file extension).
 
 For example, if you are viewing `app/views/rocket_launch.html.erb` and trigger
