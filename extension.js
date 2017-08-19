@@ -11,10 +11,16 @@ function stripExtension(basename) {
     return basename;
 }
 
-function buildPrefix(currentFilename, workspaceFolder, separator, config) {
+function stripWorkspaceFolder(currentFilename, workspaceFolder) {
     if (workspaceFolder && currentFilename.indexOf(workspaceFolder) === 0) {
-        currentFilename = currentFilename.slice(workspaceFolder.length);
+        return currentFilename.slice(workspaceFolder.length);
+    } else {
+        return currentFilename;
     }
+}
+
+function buildPrefix(currentFilename, workspaceFolder, separator, config) {
+    currentFilename = stripWorkspaceFolder(currentFilename, workspaceFolder);
 
     let filenameParts = currentFilename.split(separator);
     const index = filenameParts.length - 1 - config.directoryLevelsToPreserve;
