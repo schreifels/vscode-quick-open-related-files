@@ -15,6 +15,11 @@ quick-open-related-files, depending on your configuration, you might see:
 
 ### Installation
 
+The easiest way to install is to search for "Quick Open Related Files" in the
+vscode extension marketplace.
+
+Alternatively, you can manually install using:
+
 ```bash
 cd ~/.vscode/extensions/
 git clone https://github.com/schreifels/vscode-quick-open-related-files.git
@@ -43,7 +48,7 @@ current path before pre-populating the quick open menu. See the
 
 ## Changelog
 
-### 0.1.0
+### 1.0.0
 
 * Initial release
 
