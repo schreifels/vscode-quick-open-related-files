@@ -29,9 +29,7 @@
                     "default": [
                         "{EXTENSION}",
                         "/[_\\.]?[sS]pec$/",
-                        "/[_\\.]?[tT]est$/",
-                        "/_?[cC]ontroller$/",
-                        "/_?[hH]elper$/"
+                        "/[_\\.]?[tT]est$/"
                     ],
                     "description": "Regular expressions or strings to remove from the path"
                 }

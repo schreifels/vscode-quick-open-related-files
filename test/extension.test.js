@@ -89,11 +89,5 @@ suite('extension tests', function() {
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.test.js', patternsToStrip }), 'dir/person');
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.spec.js', patternsToStrip }), 'dir/person');
         assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person.html.erb', patternsToStrip }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_controller.rb', patternsToStrip }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/personController.js', patternsToStrip }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_helper.rb', patternsToStrip }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/personHelper.js', patternsToStrip }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/person_controller_spec.rb', patternsToStrip }), 'dir/person');
-        assert.strictEqual(buildPrefix(1, { currentFilename: '/dir/personControllerTest.js', patternsToStrip }), 'dir/person');
     });
 });
