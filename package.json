@@ -2,7 +2,7 @@
     "name": "vscode-quick-open-related-files",
     "displayName": "Quick Open Related Files",
     "description": "Instantly jump to related files using the Quick Open menu",
-    "version": "1.0.0",
+    "version": "master-post-1.0.0",
     "publisher": "schreifels",
     "engines": {
         "vscode": "^1.15.0"
