@@ -41,6 +41,12 @@ There are a couple options to customize how the extension manipulates the
 current path before pre-populating the quick open menu. See the
 `contributes.configuration` section of the `package.json` file for more details.
 
+## Changelog
+
+### 0.1.0
+
+* Initial release
+
 ## For developers
 
 Clone the repo, `npm install`, and open the directory in VS Code. For your
