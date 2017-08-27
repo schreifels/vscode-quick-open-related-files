@@ -40,6 +40,14 @@
                 "command": "quickOpenRelatedFiles.show",
                 "title": "Quick Open Related Files"
             }
+        ],
+        "keybindings": [
+            {
+                "command": "quickOpenRelatedFiles.show",
+                "key": "ctrl+.",
+                "mac": "cmd+.",
+                "when": "editorTextFocus"
+            }
         ]
     },
     "scripts": {

@@ -20,11 +20,13 @@ cd ~/.vscode/extensions/
 git clone https://github.com/schreifels/vscode-quick-open-related-files.git
 ```
 
-### Keyboard shortcut
+### Usage
 
-In addition to the "Quick Open Related Files" menu item, for even faster
-navigation, you can bind the command to `⌘+.` by adding this to
-`keybindings.json`:
+By default, you can list related files for the currently open file using the
+`⌘+.` keyboard shortcut or by selecting "Quick Open Related Files" in the
+command palette.
+
+You can customize the keyboard shortcut by adding this to `keybindings.json`:
 
 ```json
 {
